@@ -94,7 +94,7 @@ public class SqlExecutor {
             }
         } else if (obj instanceof Map) {
             for (Map.Entry<Integer, String> entry : sqlModel.getProperties().entrySet()) {
-                ps.setObject(entry.getKey(), ((Map<String, Object>) obj).get(entry.getValue()));
+                ps.setObject(entry.getKey(), ((Map) obj).get(entry.getValue()));
             }
         } else {
             for (Map.Entry<Integer, String> entry : sqlModel.getProperties().entrySet()) {
@@ -106,7 +106,7 @@ public class SqlExecutor {
     /**
      * 封装结果集到指定对象的list
      */
-    private List<Object> getResultList(ResultSet rs, Class clazz) throws Exception {
+    private List<Object> getResultList(ResultSet rs, Class<?> clazz) throws Exception {
         List<Object> list = new ArrayList<>();
         List<Map<String, Object>> resultMapList = getResultMapList(rs);
         Map<String, Class> filedMap = ClassUtil.getFiledMapByClass(clazz);
@@ -130,7 +130,7 @@ public class SqlExecutor {
         while (rs.next()) {
             Map<String, Object> rowData = new HashMap<>();
             for (int i = 1; i <= columnCount; i++) {
-                rowData.put(sqlClient.column2Property(md.getColumnName(i)), rs.getObject(i));//获取键名及值
+                rowData.put(sqlClient.column2Property(md.getColumnLabel(i)), rs.getObject(i));//获取键名及值
             }
             list.add(rowData);
         }

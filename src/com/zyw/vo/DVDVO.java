@@ -8,9 +8,21 @@ import com.zyw.pojo.LjwDVD;
  */
 public class DVDVO extends LjwDVD {
     /**
+     * 类型名
+     */
+    private Long typeName;
+    /**
      * 借出时间
      */
     private String lendDate;
+
+    public Long getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(Long typeName) {
+        this.typeName = typeName;
+    }
 
     public String getLendDate() {
         return lendDate;

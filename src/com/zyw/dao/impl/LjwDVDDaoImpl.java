@@ -15,8 +15,8 @@ import java.util.List;
 public class LjwDVDDaoImpl extends BaseDao implements LjwDVDDao {
     @Override
     public List<DVDVO> queryDVDList() {
-        return queryForList("SELECT td.*,tl.lend_date FROM t_dvd td LEFT JOIN t_lend tl on (td.id=tl.dvd_id AND tl.return_date=null)" +
-                " WHERE is_delete=0 ORDER BY td.count DESC, td.id ASC", DVDVO.class);
+        return queryForList("SELECT td.*,tl.lend_date,tt.name as typeName FROM t_dvd td LEFT JOIN t_lend tl on (td.id=tl.dvd_id AND tl.return_date=null)" +
+                "LEFT JOIN t_type tt on td.type_id = tt.id WHERE is_delete=0 ORDER BY td.count DESC, td.id ASC", DVDVO.class);
     }
 
     @Override
