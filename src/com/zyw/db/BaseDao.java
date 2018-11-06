@@ -24,19 +24,19 @@ public class BaseDao {
         return sqlExecutor.delete(sql, obj);
     }
 
-    protected List queryForList(String sql, Class clazz) {
+    protected <T> List<T> queryForList(String sql, Class<T> clazz) {
         return sqlExecutor.queryForList(sql, clazz);
     }
 
-    protected List queryForList(String sql, Class clazz, Object obj) {
+    protected <T> List<T> queryForList(String sql, Class<T> clazz, Object obj) {
         return sqlExecutor.queryForList(sql, clazz, obj);
     }
 
-    protected Object queryForObject(String sql, Class clazz) {
+    protected <T> T queryForObject(String sql, Class<T> clazz) {
         return sqlExecutor.queryForObject(sql, clazz);
     }
 
-    protected Object queryForObject(String sql, Class clazz, Object obj) {
+    protected <T> T queryForObject(String sql, Class<T> clazz, Object obj) {
         return sqlExecutor.queryForObject(sql, clazz, obj);
     }
 }

@@ -28,6 +28,6 @@ public class LjwLendDaoImpl extends BaseDao implements LjwLendDao {
 
     @Override
     public LjwLend getLendByDvdId(Long dvdId) {
-        return (LjwLend) queryForObject("select * from t_lend where dvd_id=#dvdId# AND return_date=NULL ", LjwLend.class, dvdId);
+        return queryForObject("select * from t_lend where dvd_id=#dvdId# AND return_date=NULL ", LjwLend.class, dvdId);
     }
 }

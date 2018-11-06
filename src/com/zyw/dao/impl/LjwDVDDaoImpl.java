@@ -37,6 +37,6 @@ public class LjwDVDDaoImpl extends BaseDao implements LjwDVDDao {
 
     @Override
     public LjwDVD getDVDById(Long id) {
-        return (LjwDVD) queryForObject("select * from t_dvd where id=#id# AND is_delete=0", LjwDVD.class, id);
+        return queryForObject("select * from t_dvd where id=#id# AND is_delete=0", LjwDVD.class, id);
     }
 }

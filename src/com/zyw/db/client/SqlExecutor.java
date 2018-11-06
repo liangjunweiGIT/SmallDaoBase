@@ -45,20 +45,20 @@ public class SqlExecutor {
         return update(sql, obj);
     }
 
-    public List queryForList(String sql, Class clazz) {
+    public <T> List<T> queryForList(String sql, Class<T> clazz) {
         return queryForList(sql, clazz, null);
     }
 
-    public List queryForList(String sql, Class clazz, Object obj) {
+    public <T> List<T> queryForList(String sql, Class<T> clazz, Object obj) {
         SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
         Connection con = DBhelper.getConnection();
-        List list = null;
+        List<T> list = null;
         try {
             PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
             setPreparedStatement(ps, sqlModel, obj);
             ResultSet rs = ps.executeQuery();
             if (clazz == null || clazz.equals(Map.class)) {
-                list = getResultMapList(rs);
+                list = (List<T>) getResultMapList(rs);
             } else {
                 list = getResultList(rs, clazz);
             }
@@ -70,12 +70,12 @@ public class SqlExecutor {
         return list;
     }
 
-    public Object queryForObject(String sql, Class clazz) {
+    public <T> T queryForObject(String sql, Class<T> clazz) {
         return queryForObject(sql, clazz, null);
     }
 
-    public Object queryForObject(String sql, Class clazz, Object obj) {
-        List list = queryForList(sql, clazz, obj);
+    public <T> T queryForObject(String sql, Class<T> clazz, Object obj) {
+        List<T> list = queryForList(sql, clazz, obj);
         return CollectionUtil.isEmpty(list) ? null : list.get(0);
     }
 
@@ -106,16 +106,16 @@ public class SqlExecutor {
     /**
      * 封装结果集到指定对象的list
      */
-    private List<Object> getResultList(ResultSet rs, Class<?> clazz) throws Exception {
-        List<Object> list = new ArrayList<>();
+    private <T> List<T> getResultList(ResultSet rs, Class<T> clazz) throws Exception {
+        List<T> list = new ArrayList<>();
         List<Map<String, Object>> resultMapList = getResultMapList(rs);
         Map<String, Class> filedMap = ClassUtil.getFiledMapByClass(clazz);
         for (Map<String, Object> map : resultMapList) {
-            Object o = clazz.getConstructor().newInstance();
+            T obj = clazz.getConstructor().newInstance();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                ClassUtil.setFieldValueByName(o, filedMap.get(entry.getKey()), entry.getKey(), map.get(entry.getKey()));
+                ClassUtil.setFieldValueByName(obj, filedMap.get(entry.getKey()), entry.getKey(), map.get(entry.getKey()));
             }
-            list.add(o);
+            list.add(obj);
         }
         return list;
     }

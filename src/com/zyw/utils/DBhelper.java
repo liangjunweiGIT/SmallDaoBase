@@ -48,6 +48,7 @@ public class DBhelper {
     private static void realClose(Connection con) {
         try {
             con.close();
+            CURRENT_POOL_SIZE.getAndDecrement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
