@@ -57,11 +57,7 @@ public class SqlExecutor {
             PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
             setPreparedStatement(ps, sqlModel, obj);
             ResultSet rs = ps.executeQuery();
-            if (clazz == null || clazz.equals(Map.class)) {
-                list = (List<T>) getResultMapList(rs);
-            } else {
-                list = getResultList(rs, clazz);
-            }
+            list = getResultList(rs, clazz);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -109,6 +105,9 @@ public class SqlExecutor {
     private <T> List<T> getResultList(ResultSet rs, Class<T> clazz) throws Exception {
         List<T> list = new ArrayList<>();
         List<Map<String, Object>> resultMapList = getResultMapList(rs);
+        if (clazz == null || clazz.equals(Map.class)) {
+            return (List<T>) resultMapList;
+        }
         Map<String, Class> filedMap = ClassUtil.getFiledMapByClass(clazz);
         for (Map<String, Object> map : resultMapList) {
             T obj = clazz.getConstructor().newInstance();
