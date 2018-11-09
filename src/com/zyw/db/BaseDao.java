@@ -1,7 +1,7 @@
 package com.zyw.db;
 
+import com.zyw.db.client.LjwSqlExecutor;
 import com.zyw.db.client.SqlExecutor;
-import com.zyw.utils.ProxyUtil;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @Author Created by junwei.liang on 2018/10/31 12:58
  */
 public class BaseDao {
-    private final SqlExecutor sqlExecutor = new SqlExecutor();
+    private final SqlExecutor sqlExecutor = new LjwSqlExecutor();
 
     protected int insert(String sql, Object obj) {
         return sqlExecutor.insert(sql, obj);
