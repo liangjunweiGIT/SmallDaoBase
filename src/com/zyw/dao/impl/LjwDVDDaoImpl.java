@@ -27,7 +27,7 @@ public class LjwDVDDaoImpl extends BaseDao implements LjwDVDDao {
     @Override
     public int deleteDVD(List<Long> idList) {
         StringBuilder sb = new StringBuilder("(").append(CollectionUtil.list2String(idList, ",")).append(")");
-        return update("UPDATE t_dvd set is_delete = '1'  where id in ( #sb# )", sb);
+        return update("UPDATE t_dvd set is_delete = 1  where id in ( #sb# )", sb);
     }
 
     @Override
