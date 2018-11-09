@@ -45,6 +45,7 @@ class SqlClient {
     }
 
     String column2Property(String columnName) {
+        columnName = columnName.toLowerCase();
         while (columnName.contains("_")) {
             int index = columnName.indexOf("_");
             String oldStr = columnName.substring(index + 1, index + 2);
