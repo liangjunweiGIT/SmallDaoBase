@@ -6,13 +6,8 @@ PASSWORD=root
 CORE_SIZE=10
 MAX_SIZE=100
 
-DVD_Mgr=com.zyw.dao.mgr.DVDMgr
-DVD_srevice=com.zyw.service.impl.DVDsrevice
-DVD_DAO=com.zyw.dao.DVDDao
-
-
-LJW_DVD_MGR=com.zyw.mgr.DVDMgr
-LJW_DVD_SERVICE=com.zyw.service.impl.LjwDVDServiceImpl
-LJW_DVD_DAO=com.zyw.dao.impl.LjwDVDDaoImpl
-LJW_LEND_DAO=com.zyw.dao.impl.LjwLendDaoImpl
-LJW_TYPE_DAO=com.zyw.dao.impl.LjwTypeDaoImpl
+LJW_DVD_MGR=com.ljw.test.mgr.DvdMgr
+LJW_DVD_SERVICE=com.ljw.test.service.impl.LjwDvdServiceImpl
+LJW_DVD_DAO=com.ljw.test.dao.impl.LjwDvdDaoImpl
+LJW_LEND_DAO=com.ljw.test.dao.impl.LjwLendDaoImpl
+LJW_TYPE_DAO=com.ljw.test.dao.impl.LjwTypeDaoImpl
